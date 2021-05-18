@@ -1,1 +1,2 @@
 include ':xcrash_lib', ':xcrash_sample'
+include ':xcrash_lib_xxx'
