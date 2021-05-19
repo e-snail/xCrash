@@ -36,6 +36,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     //implementation 'com.iqiyi.xcrash:xcrash-android-lib:3.0.0'
     implementation project(':xcrash_lib')
+    implementation project(':xcrash_lib_xxx')
 }
 
 apply from: rootProject.file('gradle/sanitizer.gradle')

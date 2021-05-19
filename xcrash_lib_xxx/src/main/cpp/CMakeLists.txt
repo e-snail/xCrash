@@ -10,7 +10,7 @@ add_compile_options(
         -Werror)
 
 #######################################
-# libxcrash.so
+# libxcrash_xxx.so
 #######################################
 
 file(GLOB XCRASH_SRC
@@ -18,38 +18,38 @@ file(GLOB XCRASH_SRC
         common/*.c
         dl/*.c)
 
-add_library(xcrash SHARED
+add_library(xcrash_xxx SHARED
         ${XCRASH_SRC})
 
-target_include_directories(xcrash PUBLIC
+target_include_directories(xcrash_xxx PUBLIC
         xcrash
         xcrash_dumper
         common
         dl)
 
-target_link_libraries(xcrash
+target_link_libraries(xcrash_xxx
         log
         dl)
 
 if(USEASAN)
 
-target_compile_options(xcrash PUBLIC
+target_compile_options(xcrash_xxx PUBLIC
         -fsanitize=address
         -fno-omit-frame-pointer)
 
-set_target_properties(xcrash PROPERTIES
+set_target_properties(xcrash_xxx PROPERTIES
         LINK_FLAGS " \
         -fsanitize=address")
 
 else()
 
-target_compile_options(xcrash PUBLIC
+target_compile_options(xcrash_xxx PUBLIC
         -Oz
         -flto
         -ffunction-sections
         -fdata-sections)
 
-set_target_properties(xcrash PROPERTIES
+set_target_properties(xcrash_xxx PROPERTIES
         LINK_FLAGS " \
         -O3 \
         -flto \

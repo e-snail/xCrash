@@ -42,7 +42,6 @@ apply from: rootProject.file('gradle/check.gradle')
 apply from: rootProject.file('gradle/publish.gradle')
 
 dependencies {
-
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     testImplementation 'junit:junit:4.+'

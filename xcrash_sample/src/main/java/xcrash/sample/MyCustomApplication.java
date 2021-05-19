@@ -31,10 +31,10 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileWriter;
 
-import xcrash.TombstoneManager;
-import xcrash.TombstoneParser;
-import xcrash.XCrash;
-import xcrash.ICrashCallback;
+//import xcrash.TombstoneManager;
+//import xcrash.TombstoneParser;
+//import xcrash.XCrash;
+//import xcrash.ICrashCallback;
 
 public class MyCustomApplication extends Application {
     private final String TAG = "xcrash_sample";
@@ -44,7 +44,8 @@ public class MyCustomApplication extends Application {
         super.attachBaseContext(base);
 
         // callback for java crash, native crash and ANR
-        ICrashCallback callback = new ICrashCallback() {
+        lib.base.xcrash.ICrashCallback callback = new lib.base.xcrash.ICrashCallback() {
+        //ICrashCallback callback = new ICrashCallback() {
             @Override
             public void onCrash(String logPath, String emergency) {
                 Log.d(TAG, "log path: " + (logPath != null ? logPath : "(null)") + ", emergency: " + (emergency != null ? emergency : "(null)"));
@@ -58,8 +59,10 @@ public class MyCustomApplication extends Application {
                     // Add some expanded sections. Send crash report at the next time APP startup.
 
                     // OK
-                    TombstoneManager.appendSection(logPath, "expanded_key_1", "expanded_content");
-                    TombstoneManager.appendSection(logPath, "expanded_key_2", "expanded_content_row_1\nexpanded_content_row_2");
+                    //fixme wyb
+                    Log.e(TAG, "onCrash: " + " expanded_key_1 " + "expanded_content");
+                    //TombstoneManager.appendSection(logPath, "expanded_key_1", "expanded_content");
+                    //TombstoneManager.appendSection(logPath, "expanded_key_2", "expanded_content_row_1\nexpanded_content_row_2");
 
                     // Invalid. (Do NOT include multiple consecutive newline characters ("\n\n") in the content string.)
                     // TombstoneManager.appendSection(logPath, "expanded_key_3", "expanded_content_row_1\n\nexpanded_content_row_2");
@@ -72,7 +75,8 @@ public class MyCustomApplication extends Application {
         Log.d(TAG, "xCrash SDK init: start");
 
         // Initialize xCrash.
-        XCrash.init(this, new XCrash.InitParameters()
+        lib.base.xcrash.XCrash.init(this, new lib.base.xcrash.XCrash.InitParameters()
+        //XCrash.init(this, new XCrash.InitParameters()
             .setAppVersion("1.2.3-beta456-patch789")
             .setJavaRethrow(true)
             .setJavaLogCountMax(10)
@@ -98,9 +102,10 @@ public class MyCustomApplication extends Application {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for(File file : TombstoneManager.getAllTombstones()) {
-                    sendThenDeleteCrashLog(file.getAbsolutePath(), null);
-                }
+                //fixme wyb
+//                for(File file : TombstoneManager.getAllTombstones()) {
+//                    sendThenDeleteCrashLog(file.getAbsolutePath(), null);
+//                }
             }
         }).start();
     }
@@ -124,20 +129,21 @@ public class MyCustomApplication extends Application {
     private void debug(String logPath, String emergency) {
         // Parse and save the crash info to a JSON file for debugging.
         FileWriter writer = null;
-        try {
-            File debug = new File(XCrash.getLogDir() + "/debug.json");
-            debug.createNewFile();
-            writer = new FileWriter(debug, false);
-            writer.write(new JSONObject(TombstoneParser.parse(logPath, emergency)).toString());
-        } catch (Exception e) {
-            Log.d(TAG, "debug failed", e);
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (Exception ignored) {
-                }
-            }
-        }
+        //fixme wyb
+//        try {
+//            File debug = new File(XCrash.getLogDir() + "/debug.json");
+//            debug.createNewFile();
+//            writer = new FileWriter(debug, false);
+//            writer.write(new JSONObject(TombstoneParser.parse(logPath, emergency)).toString());
+//        } catch (Exception e) {
+//            Log.d(TAG, "debug failed", e);
+//        } finally {
+//            if (writer != null) {
+//                try {
+//                    writer.close();
+//                } catch (Exception ignored) {
+//                }
+//            }
+//        }
     }
 }
